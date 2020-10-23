@@ -1,0 +1,200 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "My First Swagger",
+        "description": "Swagger for dummy :) ",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8019",
+    "basePath": "/",
+    "tags": [{
+        "name": "Products",
+        "description": ""
+    }],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/Products": {
+            "get": {
+                "tags": ["Products"],
+                "description": "Create new user in system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Products"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Products"],
+                "description": "Create new Product",
+                "parameters": [{
+                    "name": "product",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Product"
+                    }
+                }],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    }
+                }
+
+            }
+        },
+        "/Products/{id}": {
+            "parameters": [{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID of the products that we want to match",
+                "type": "string"
+            }],
+            "get": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Get user with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Product with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Product not found."
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update user with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "product with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                },
+                {
+                    "name": "product",
+                    "in": "body",
+                    "description": "User that we want to create",
+                    "schema": {
+                        "$ref": "#/definitions/Product"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Product"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Product not found."
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Product"
+                ],
+                "summary": "Update user with given ID",
+                "parameters": [{
+                    "in": "path",
+                    "name": "id",
+                    "required": true,
+                    "description": "Products with id",
+                    "schema": {
+                        "$ref": "#/definitions/id"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/id"
+                        }
+                    },
+                    "404": {
+                        "description": "Failed. Products not found."
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "id": {
+            "properties": {
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        },
+        "Product": {
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "boolean"
+                },
+                "lastFedDate": {
+                    "type": "string"
+                }
+            }
+        },
+        "Products": {
+            "type": "object",
+            "properties": {
+                "products": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "$ref": "#/definitions/Product"
+                    }
+                }
+            }
+        }
+    }
+}
